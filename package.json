@@ -1,0 +1,30 @@
+{
+  "name": "react-coverflow2",
+  "version": "0.0.0",
+  "description": "Carousel of coverflow effect",
+  "main": "react-coverflow2.jsx",
+  "scripts": {
+    "test": "node test/exemple.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bastorx/react-coverflow2.git"
+  },
+  "keywords": [
+    "Carousel"
+  ],
+  "author": "Bastorx",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Bastorx/react-coverflow2/issues"
+  },
+  "homepage": "https://github.com/Bastorx/react-coverflow2#readme",
+  "devDependencies": {
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7"
+  },
+  "peersDependencies": {
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0"
+  }
+}
