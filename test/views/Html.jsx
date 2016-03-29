@@ -26,12 +26,12 @@ var Html = React.createClass({
 					<meta name="keywords" content="react, coverflow, 2, bastien, chevallier, developer, fullstack" />
 					<meta name="content-language" content="fr" />
 					<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+					<link href="/test.css" rel="stylesheet" type="text/css" />
 				</head>
 				<body>
 					<h1>React Coverflow 2</h1>
 					<div id="app" />
                 	<div className="oldBrowser" dangerouslySetInnerHTML={{__html: oldBrowserHtml}} />
-
                 	<script src="./app.js"></script>
 				</body>
 			</html>

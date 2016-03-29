@@ -1,10 +1,12 @@
 {
   "name": "react-coverflow2",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Carousel of coverflow effect",
-  "main": "react-coverflow2.jsx",
+  "main": "react-coverflow2.min.jsx",
   "scripts": {
-    "test": "node test/server.js"
+    "build": "browserify -t reactify react-coverflow2.jsx > react-coverflow2.min.jsx",
+    "test": "node test/server.js",
+    "build test": "browserify -t reactify test/client.js > test/public/app.js"
   },
   "repository": {
     "type": "git",
@@ -20,18 +22,17 @@
   },
   "homepage": "https://github.com/Bastorx/react-coverflow2#readme",
   "devDependencies": {
+    "browserify": "^13.0.0",
     "express-react-views": "^0.10.0",
     "node-jsx": "^0.13.3",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
-    "reactify": "^1.1.1"
+    "reactify": "^1.1.1",
+    "express": "^4.13.4",
+    "lodash": "^4.6.1"
   },
   "peersDependencies": {
     "react": "^0.14.0",
     "react-dom": "^0.14.0"
-  },
-  "dependencies": {
-    "dev": "^0.1.3",
-    "express": "^4.13.4"
   }
 }
