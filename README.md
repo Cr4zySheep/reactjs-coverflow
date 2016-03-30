@@ -32,7 +32,7 @@ The required stylesheet using `css-module` and include in package(js file), so y
 
 ```
 var React = require('react');
-var Coverflow = require('../../lib/react-coverflowX')
+var Coverflow = require('reactjs-coverflow');
 
 module.exports = React.createClass({
 	render: function() {
