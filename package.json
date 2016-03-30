@@ -2,11 +2,12 @@
   "name": "react-coverflow2",
   "version": "0.1.0",
   "description": "Carousel of coverflow effect",
-  "main": "react-coverflow2.min.jsx",
+  "main": "lib/react-coverflow2.js",
   "scripts": {
-    "build": "browserify -t reactify react-coverflow2.jsx > react-coverflow2.min.jsx",
+    "compil": "babel --presets es2015,react src/ --out-dir lib/",
+    "build-test": "browserify -t reactify test/client.js > test/public/app.js",
     "test": "node test/server.js",
-    "build test": "browserify -t reactify test/client.js > test/public/app.js"
+    "full": "npm run compil && npm run build-test && npm run test"
   },
   "repository": {
     "type": "git",
@@ -28,11 +29,13 @@
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "reactify": "^1.1.1",
-    "express": "^4.13.4",
-    "lodash": "^4.6.1"
+    "express": "^4.13.4"
   },
   "peersDependencies": {
     "react": "^0.14.0",
     "react-dom": "^0.14.0"
+  },
+  "dependencies": {
+    "lodash": "^4.6.1"
   }
 }
