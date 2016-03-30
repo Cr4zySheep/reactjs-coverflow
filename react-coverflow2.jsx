@@ -3,9 +3,8 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var _ = require('lodash');
-//var css = require('stylesheets/react-coverflow2');
 
-var Coverflow = React.createClass({
+module.exports = React.createClass({
 	getDefaultProps: function() {
 		return {
 			animationSpeed: 0.7,
@@ -117,14 +116,14 @@ var Coverflow = React.createClass({
 	    	this.next();
 	    }
 	},
-	_handleTouchStart(e) {
+	_handleTouchStart: function(e) {
 		e.preventDefault();
 
 		this.setState({
 			touchStart: e.nativeEvent.touches[0].clientX
 		});
 	},
-	_handleTouchMove(e) {
+	_handleTouchMove: function(e) {
 		e.preventDefault();
 
 		var clientX = e.nativeEvent.touches[0].clientX;
@@ -153,6 +152,3 @@ var Coverflow = React.createClass({
 		}.bind(this));
 	}
 });
-
-
-module.exports = Coverflow;
