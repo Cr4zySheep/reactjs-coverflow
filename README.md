@@ -5,10 +5,11 @@ React Coverflow
 [![NPM](https://nodei.co/npm/reactjs-coverflow.png)](https://nodei.co/npm/reactjs-coverflow/)
 
 ---
+(Inspired from https://github.com/andyyou/react-coverflow)
 
 React Coverflow is a React component for building cover flow style carousel in a convenient way.
 
-Features of `react-coverflow`
+Features of `reactjs-coverflow`
 
 * Flexbox styles of CSS 3.
 * Support scroll in the component.
