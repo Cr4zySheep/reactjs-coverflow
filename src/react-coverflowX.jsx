@@ -140,7 +140,7 @@ module.exports = React.createClass({
 		}.bind(this));
 	},
 	_loadCSS: function() {
-		if (!this.constructor.cssLoaded && document) {
+		if (!this.constructor.cssLoaded && typeof document != "undefined") {
 			this.constructor.cssLoaded = true;
 
 			var css = ".react-coverflow-X_Main { position: relative; margin: 0; padding: 0; background-color: rgba(0, 0, 0, 0.1); overflow: hidden; } .react-coverflow-X_Coverflow { width: 100%; height: 100%; display: flex; -webkit-transform-style: preserve-3d; transform-style: preserve-3d; -webkit-perspective: 500px; perspective: 500px; } .react-coverflow-X_Element { position: relative; -webkit-box-reflect: below 1px -webkit-linear-gradient(bottom,rgba(0,0,0,.6),rgba(0,0,0,.1) 20%,transparent 30%,transparent); }";
