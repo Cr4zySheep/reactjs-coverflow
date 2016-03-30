@@ -51,7 +51,7 @@ module.exports = React.createClass({
 					    <div style={{width: '150px', height: '150px', backgroundColor: 'blue'}} />
 					    <div style={{width: '150px', height: '150px', backgroundColor: 'purple'}} />
 					    <div style={{width: '100px', height: '150px', backgroundColor: '#000000'}} />
-						<div style={{width: '200px', height: '150px', backgroundColor: 'pink'}} />
+					    <div style={{width: '200px', height: '150px', backgroundColor: 'pink'}} />
 					</Coverflow>
 
 					<button onClick={this.prev} type="button">Prev</button>
