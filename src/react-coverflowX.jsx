@@ -22,7 +22,7 @@ module.exports = React.createClass({
 		if (this.constructor.cssLoaded) return;
 		this.constructor.cssLoaded = true;
 
-		var css = ".react-coverflow-2_Main { position: relative; margin: 0; padding: 0; background-color: rgba(0, 0, 0, 0.1); overflow: hidden; } .react-coverflow-2_Coverflow { width: 100%; height: 100%; display: flex; -webkit-transform-style: preserve-3d; transform-style: preserve-3d; -webkit-perspective: 500px; perspective: 500px; } .react-coverflow-2_Element { position: relative; -webkit-box-reflect: below 1px -webkit-linear-gradient(bottom,rgba(0,0,0,.6),rgba(0,0,0,.1) 20%,transparent 30%,transparent); }";
+		var css = ".react-coverflow-X_Main { position: relative; margin: 0; padding: 0; background-color: rgba(0, 0, 0, 0.1); overflow: hidden; } .react-coverflow-X_Coverflow { width: 100%; height: 100%; display: flex; -webkit-transform-style: preserve-3d; transform-style: preserve-3d; -webkit-perspective: 500px; perspective: 500px; } .react-coverflow-X_Element { position: relative; -webkit-box-reflect: below 1px -webkit-linear-gradient(bottom,rgba(0,0,0,.6),rgba(0,0,0,.1) 20%,transparent 30%,transparent); }";
     	var	head = document.head || document.getElementsByTagName('head')[0],
     		style = document.createElement('style');
 
@@ -36,7 +36,7 @@ module.exports = React.createClass({
 	},
 	componentDidMount: function() {
 		var coverflow = ReactDOM.findDOMNode(this.refs.coverflow);
-		var elements = coverflow.getElementsByClassName("react-coverflow-2_Element");
+		var elements = coverflow.getElementsByClassName("react-coverflow-X_Element");
 
 		var width = [];
 
@@ -65,15 +65,15 @@ module.exports = React.createClass({
 	render: function() {
 		return (
 			<div ref="coverflow"
-			className="react-coverflow-2_Main"
+			className="react-coverflow-X_Main"
 			{...this.props}
 			onWheel={this.props.enableScroll ? this._handleWheel : ""}
 			onTouchStart={this._handleTouchStart}
            	onTouchMove={this._handleTouchMove}>
-				<div className="react-coverflow-2_Coverflow">
+				<div className="react-coverflow-X_Coverflow">
 					{_.map(this.props.children, function(element, i) {
 						return (
-							<figure key={i} className="react-coverflow-2_Element" style={{margin: "auto " + this.props.margin}}>
+							<figure key={i} className="react-coverflow-X_Element" style={{margin: "auto " + this.props.margin}}>
 								{element}
 							</figure>
 						);

@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react');
-var Coverflow = require('../../lib/react-coverflow2')
+var Coverflow = require('../../lib/react-coverflowX')
 
 var Exemple = React.createClass({
 	render: function() {

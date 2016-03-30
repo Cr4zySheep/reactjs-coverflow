@@ -1,8 +1,8 @@
 {
-  "name": "react-coverflow2",
+  "name": "react-coverflowX",
   "version": "0.1.0",
   "description": "Carousel of coverflow effect",
-  "main": "lib/react-coverflow2.js",
+  "main": "lib/react-coverflowX.js",
   "scripts": {
     "compil": "babel --presets es2015,react src/ --out-dir lib/",
     "build-test": "browserify -t reactify test/client.js > test/public/app.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Bastorx/react-coverflow2.git"
+    "url": "git+https://github.com/Bastorx/react-coverflowX.git"
   },
   "keywords": [
     "Carousel"
@@ -19,9 +19,9 @@
   "author": "Bastorx",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Bastorx/react-coverflow2/issues"
+    "url": "https://github.com/Bastorx/react-coverflowX/issues"
   },
-  "homepage": "https://github.com/Bastorx/react-coverflow2#readme",
+  "homepage": "https://github.com/Bastorx/react-coverflowX#readme",
   "devDependencies": {
     "browserify": "^13.0.0",
     "express-react-views": "^0.10.0",

@@ -27,7 +27,7 @@ module.exports = React.createClass({
 		if (this.constructor.cssLoaded) return;
 		this.constructor.cssLoaded = true;
 
-		var css = ".react-coverflow-2_Main { position: relative; margin: 0; padding: 0; background-color: rgba(0, 0, 0, 0.1); overflow: hidden; } .react-coverflow-2_Coverflow { width: 100%; height: 100%; display: flex; -webkit-transform-style: preserve-3d; transform-style: preserve-3d; -webkit-perspective: 500px; perspective: 500px; } .react-coverflow-2_Element { position: relative; -webkit-box-reflect: below 1px -webkit-linear-gradient(bottom,rgba(0,0,0,.6),rgba(0,0,0,.1) 20%,transparent 30%,transparent); }";
+		var css = ".react-coverflow-X_Main { position: relative; margin: 0; padding: 0; background-color: rgba(0, 0, 0, 0.1); overflow: hidden; } .react-coverflow-X_Coverflow { width: 100%; height: 100%; display: flex; -webkit-transform-style: preserve-3d; transform-style: preserve-3d; -webkit-perspective: 500px; perspective: 500px; } .react-coverflow-X_Element { position: relative; -webkit-box-reflect: below 1px -webkit-linear-gradient(bottom,rgba(0,0,0,.6),rgba(0,0,0,.1) 20%,transparent 30%,transparent); }";
 		var head = document.head || document.getElementsByTagName('head')[0],
 		    style = document.createElement('style');
 
@@ -41,7 +41,7 @@ module.exports = React.createClass({
 	},
 	componentDidMount: function componentDidMount() {
 		var coverflow = ReactDOM.findDOMNode(this.refs.coverflow);
-		var elements = coverflow.getElementsByClassName("react-coverflow-2_Element");
+		var elements = coverflow.getElementsByClassName("react-coverflow-X_Element");
 
 		var width = [];
 
@@ -70,18 +70,18 @@ module.exports = React.createClass({
 		return React.createElement(
 			'div',
 			_extends({ ref: 'coverflow',
-				className: 'react-coverflow-2_Main'
+				className: 'react-coverflow-X_Main'
 			}, this.props, {
 				onWheel: this.props.enableScroll ? this._handleWheel : "",
 				onTouchStart: this._handleTouchStart,
 				onTouchMove: this._handleTouchMove }),
 			React.createElement(
 				'div',
-				{ className: 'react-coverflow-2_Coverflow' },
+				{ className: 'react-coverflow-X_Coverflow' },
 				_.map(this.props.children, function (element, i) {
 					return React.createElement(
 						'figure',
-						{ key: i, className: 'react-coverflow-2_Element', style: { margin: "auto " + this.props.margin } },
+						{ key: i, className: 'react-coverflow-X_Element', style: { margin: "auto " + this.props.margin } },
 						element
 					);
 				}.bind(this))
@@ -34288,7 +34288,7 @@ ReactDOM.render(
 'use strict';
 
 var React = require('react');
-var Coverflow = require('../../lib/react-coverflow2')
+var Coverflow = require('../../lib/react-coverflowX')
 
 var Exemple = React.createClass({displayName: "Exemple",
 	render: function() {
@@ -34329,4 +34329,4 @@ var Exemple = React.createClass({displayName: "Exemple",
 
 module.exports = Exemple;
 
-},{"../../lib/react-coverflow2":1,"react":160}]},{},[161]);
+},{"../../lib/react-coverflowX":1,"react":160}]},{},[161]);
