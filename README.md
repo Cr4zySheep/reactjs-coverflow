@@ -126,7 +126,7 @@ Feel free to fork and improve/enhance `reactjs-coverflow` any way you want. If y
 
 If you want to custom the component there are some commands that can help you.
 
-# Warning (babel-cli, babel-preset-es2015 and babel-preset-react must to be installed)
+#### Warning (babel-cli, babel-preset-es2015 and babel-preset-react must to be installed)
 ```
 $npm install -g babel babel-cli babel-preset-es2015 babel-preset-react
 ```
