@@ -147,4 +147,8 @@ $ npm run full
 ```
 
 ## Release History
-* 2016-03-30 v0.1.0
+* 2016-03-30 v0.1 First Version
+
+
+## To Do
+* Dynamical margin between coverflow_Element
