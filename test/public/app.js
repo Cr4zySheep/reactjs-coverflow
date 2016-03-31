@@ -24,22 +24,10 @@ module.exports = React.createClass({
 		};
 	},
 	componentWillMount: function componentWillMount() {
-		if (this.constructor.cssLoaded) return;
-		this.constructor.cssLoaded = true;
-
-		var css = ".react-coverflow-X_Main { position: relative; margin: 0; padding: 0; background-color: rgba(0, 0, 0, 0.1); overflow: hidden; } .react-coverflow-X_Coverflow { width: 100%; height: 100%; display: flex; -webkit-transform-style: preserve-3d; transform-style: preserve-3d; -webkit-perspective: 500px; perspective: 500px; } .react-coverflow-X_Element { position: relative; -webkit-box-reflect: below 1px -webkit-linear-gradient(bottom,rgba(0,0,0,.6),rgba(0,0,0,.1) 20%,transparent 30%,transparent); }";
-		var head = document.head || document.getElementsByTagName('head')[0],
-		    style = document.createElement('style');
-
-		style.type = 'text/css';
-		if (style.styleSheet) {
-			style.styleSheet.cssText = css;
-		} else {
-			style.appendChild(document.createTextNode(css));
-		}
-		head.appendChild(style);
+		this._loadCSS();
 	},
 	componentDidMount: function componentDidMount() {
+		this._loadCSS();
 		var coverflow = ReactDOM.findDOMNode(this.refs.coverflow);
 		var elements = coverflow.getElementsByClassName("react-coverflow-X_Element");
 
@@ -47,11 +35,12 @@ module.exports = React.createClass({
 
 		_.forEach(elements, function (e, key) {
 			if (key > 0) {
-				width.push(width[key - 1] + e.offsetWidth + parseFloat(this.props.margin) * 2);
+				width.push(width[key - 1] + e.offsetWidth + (parseFloat(e.style && e.style.marginLeft) + parseFloat(e.style && e.style.marginLeft)));
 			} else {
-				width.push(e.offsetWidth + parseFloat(this.props.margin) * 2);
+				width.push(e.offsetWidth + (parseFloat(e.style && e.style.marginLeft) + parseFloat(e.style && e.style.marginLeft)));
 			}
 		}.bind(this));
+		console.log(width);
 
 		var translateX = "translateX(" + (coverflow.offsetWidth / 2 - width[0] / 2 - (this.state.position > 0 ? width[this.state.position - 1] : 0)) + "px)";
 		_.forEach(elements, function (e, key) {
@@ -155,6 +144,23 @@ module.exports = React.createClass({
 			var rotateY = position > key ? " rotateY(40deg)" : position < key ? " rotateY(-40deg)" : "";
 			e.style.transform = translateX + rotateY;
 		}.bind(this));
+	},
+	_loadCSS: function _loadCSS() {
+		if (!this.constructor.cssLoaded && typeof document != "undefined") {
+			this.constructor.cssLoaded = true;
+
+			var css = ".react-coverflow-X_Main { position: relative; margin: 0; padding: 0; background-color: rgba(0, 0, 0, 0.1); overflow: hidden; } .react-coverflow-X_Coverflow { width: 100%; height: 100%; display: flex; -webkit-transform-style: preserve-3d; transform-style: preserve-3d; -webkit-perspective: 500px; perspective: 500px; } .react-coverflow-X_Element { position: relative; -webkit-box-reflect: below 1px -webkit-linear-gradient(bottom,rgba(0,0,0,.6),rgba(0,0,0,.1) 20%,transparent 30%,transparent); }";
+			var head = document.head || document.getElementsByTagName('head')[0],
+			    style = document.createElement('style');
+
+			style.type = 'text/css';
+			if (style.styleSheet) {
+				style.styleSheet.cssText = css;
+			} else {
+				style.appendChild(document.createTextNode(css));
+			}
+			head.appendChild(style);
+		}
 	}
 });
 
@@ -34297,7 +34303,7 @@ var Exemple = React.createClass({displayName: "Exemple",
 				React.createElement("form", null, 
 					React.createElement(Coverflow, {ref: "coverflow", 
 					style: {width: "100vw", height:"500px"}, 
-					margin: "30px", 
+					margin: "20px", 
 					startPosition: 4, 
 					enableScroll: true}, 
 					    React.createElement("div", {style: {width: '150px', height: '150px', backgroundColor: 'pink'}}), 

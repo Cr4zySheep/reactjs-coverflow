@@ -10,7 +10,7 @@ var Exemple = React.createClass({
 				<form>
 					<Coverflow ref="coverflow"
 					style={{width: "100vw", height:"500px"}}
-					margin="30px"
+					margin="20px"
 					startPosition={4}
 					enableScroll={true}>
 					    <div style={{width: '150px', height: '150px', backgroundColor: 'pink'}} />
