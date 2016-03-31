@@ -1,6 +1,6 @@
 {
   "name": "reactjs-coverflow",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A coverflow module for React",
   "main": "lib/react-coverflowX.js",
   "scripts": {
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Bastorx/reactjs-coverflowX.git"
+    "url": "git+https://github.com/Bastorx/reactjs-coverflow.git"
   },
   "keywords": [
     "Carousel",
