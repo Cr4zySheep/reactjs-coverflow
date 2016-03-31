@@ -40,7 +40,6 @@ module.exports = React.createClass({
 				width.push(e.offsetWidth + (parseFloat(e.style && e.style.marginLeft) + parseFloat(e.style && e.style.marginLeft)));
 			}
 		}.bind(this));
-		console.log(width);
 
 		var translateX = "translateX(" + (coverflow.offsetWidth / 2 - width[0] / 2 - (this.state.position > 0 ? width[this.state.position - 1] : 0)) + "px)";
 		_.forEach(elements, function (e, key) {
