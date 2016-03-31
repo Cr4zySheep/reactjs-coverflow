@@ -152,3 +152,4 @@ $ npm run full
 
 ## To Do
 * Dynamical margin between coverflow_Element
+* Margin is not compatible with em, vw, vh... value
