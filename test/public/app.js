@@ -37,7 +37,7 @@ module.exports = React.createClass({
 		_.forEach(elements, function (e, key) {
 			offset.push(e.offsetLeft);
 		});
-		console.log("offset", offset);
+
 		var translateX = "translateX(" + (coverflow.offsetWidth / 2 - elements[this.state.position].offsetWidth / 2 - offset[this.state.position]) + "px)";
 		_.forEach(elements, function (e, key) {
 			var rotateY = this.state.position > key ? " rotateY(40deg)" : this.state.position < key ? " rotateY(-40deg)" : "";
@@ -52,22 +52,19 @@ module.exports = React.createClass({
 		});
 	},
 	componentDidUpdate: function componentDidUpdate() {
-		console.log("componentDidUpdate", this.state.shouldUpdate);
 		if (!this.state.shouldUpdate) return;
 
-		console.log("action");
 		this.setState({ shouldUpdate: false });
 		var offset = [];
 
 		_.forEach(this.state.elements, function (e, key) {
 			offset.push(e.offsetLeft);
 		});
-		console.log("offset", offset);
+
 		this.setState({ offset: offset });
 		this._animation(this.state.position, offset);
 	},
 	componentWillReceiveProps: function componentWillReceiveProps(newProps) {
-		console.log("componentWillReceiveProps");
 		if (newProps.margin) this.setState({ shouldUpdate: true });
 	},
 	render: function render() {
@@ -34340,20 +34337,15 @@ var Exemple = React.createClass({displayName: "Exemple",
 					React.createElement("input", {type: "text", name: "margin", onChange: this.handleChange}), 
 					React.createElement("button", {onClick: this.prev, type: "button"}, "Prev"), 
 					React.createElement("button", {onClick: this.next, type: "button"}, "Next"), 
-					React.createElement("br", null), 
 					React.createElement("button", {onClick: this.getPosition, type: "button"}, "GetPosition"), 
-					React.createElement("br", null), 
 					React.createElement("button", {onClick: this.goAt.bind(null, 4), type: "button"}, "Go At 5")
 				)
 			)
 		);
 	},
-	handleChange: function(e) {
+	handleMarginChange: function(e) {
 		e.preventDefault();
-
-		var obj = {};
-		obj[e.currentTarget.name] = parseFloat(e.currentTarget.value);
-		this.setState(obj);
+		this.setState({margin: parseFloat(e.currentTarget.value)});
 	},
 	prev: function(e) {
 		e.preventDefault();
