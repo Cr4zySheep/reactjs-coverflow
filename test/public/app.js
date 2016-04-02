@@ -35,13 +35,13 @@ module.exports = React.createClass({
 
 		_.forEach(elements, function (e, key) {
 			if (key > 0) {
-				width.push(width[key - 1] + e.offsetWidth + (parseFloat(e.style && e.style.marginLeft) + parseFloat(e.style && e.style.marginLeft)));
+				width.push(e.offsetLeft - elements[0].offsetLeft);
 			} else {
-				width.push(e.offsetWidth + (parseFloat(e.style && e.style.marginLeft) + parseFloat(e.style && e.style.marginLeft)));
+				width.push(0);
 			}
 		}.bind(this));
 
-		var translateX = "translateX(" + (coverflow.offsetWidth / 2 - width[0] / 2 - (this.state.position > 0 ? width[this.state.position - 1] : 0)) + "px)";
+		var translateX = "translateX(" + (coverflow.offsetWidth / 2 - (elements[this.state.position].offsetWidth / 2 + elements[0].offsetLeft) - width[this.state.position]) + "px)";
 		_.forEach(elements, function (e, key) {
 			var rotateY = this.state.position > key ? " rotateY(40deg)" : this.state.position < key ? " rotateY(-40deg)" : "";
 			e.style.transform = translateX + rotateY;
@@ -53,6 +53,18 @@ module.exports = React.createClass({
 			elements: elements,
 			coverflow: coverflow
 		});
+	},
+	componentWillReceiveProps: function componentWillReceiveProps(newProps) {
+		if (newProps.margin) {
+			_.forEach(elements, function (e, key) {
+				if (key > 0) {
+					width.push(e.offsetLeft - elements[0].offsetLeft);
+				} else {
+					width.push(0);
+				}
+			}.bind(this));
+			_animation(this.state.position);
+		}
 	},
 	render: function render() {
 		return React.createElement(
@@ -138,7 +150,8 @@ module.exports = React.createClass({
 		}
 	},
 	_animation: function _animation(position) {
-		var translateX = "translateX(" + (this.state.coverflow.offsetWidth / 2 - this.state.width[0] / 2 - (position > 0 ? this.state.width[position - 1] : 0)) + "px)";
+		console.log(this.state.elements[position].offsetWidth);
+		var translateX = "translateX(" + (this.state.coverflow.offsetWidth / 2 - (this.state.elements[position].offsetWidth / 2 + this.state.elements[0].offsetLeft) - this.state.width[position]) + "px)";
 		_.forEach(this.state.elements, function (e, key) {
 			var rotateY = position > key ? " rotateY(40deg)" : position < key ? " rotateY(-40deg)" : "";
 			e.style.transform = translateX + rotateY;
@@ -34301,7 +34314,7 @@ var Exemple = React.createClass({displayName: "Exemple",
 			React.createElement("div", null, 
 				React.createElement("form", null, 
 					React.createElement(Coverflow, {ref: "coverflow", 
-					style: {width: "100vw", height:"500px"}, 
+					style: {width: "500px", height:"500px"}, 
 					margin: "20px", 
 					startPosition: 4, 
 					enableScroll: true}, 

@@ -9,7 +9,7 @@ var Exemple = React.createClass({
 			<div>
 				<form>
 					<Coverflow ref="coverflow"
-					style={{width: "100vw", height:"500px"}}
+					style={{width: "500px", height:"500px"}}
 					margin="20px"
 					startPosition={4}
 					enableScroll={true}>
