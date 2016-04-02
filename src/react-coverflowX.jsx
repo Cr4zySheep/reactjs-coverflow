@@ -15,7 +15,8 @@ module.exports = React.createClass({
 	},
 	getInitialState: function() {
 		return {
-			position: this.props.startPosition
+			position: this.props.startPosition,
+			shouldUpdate: false
 		};
 	},
 	componentWillMount: function() {
@@ -26,29 +27,40 @@ module.exports = React.createClass({
 		var coverflow = ReactDOM.findDOMNode(this.refs.coverflow);
 		var elements = coverflow.getElementsByClassName("react-coverflow-X_Element");
 
-		var width = [];
+		var offset = [];
 
 		_.forEach(elements, function(e, key) {
-			if (key > 0) {
-				width.push(width[key - 1] + e.offsetWidth + (parseFloat(e.style && e.style.marginLeft) + parseFloat(e.style && e.style.marginLeft)));
-			}
-			else {
-				width.push(e.offsetWidth + (parseFloat(e.style && e.style.marginLeft) + parseFloat(e.style && e.style.marginLeft)));
-			}
-		}.bind(this));
+				offset.push(e.offsetLeft);
+		});
 
-		var translateX = "translateX(" + ((coverflow.offsetWidth / 2) - (width[0] / 2) - (this.state.position > 0 ? width[(this.state.position) - 1] : 0)) + "px)";
+		var translateX = "translateX(" + ((coverflow.offsetWidth / 2) - (elements[this.state.position].offsetWidth / 2) - offset[(this.state.position)]) + "px)";
 		_.forEach(elements, function(e, key) {
 			var rotateY = this.state.position > key ? " rotateY(40deg)" : this.state.position < key ? " rotateY(-40deg)" : "";
 			e.style.transform = translateX + rotateY;
-			e.style.transition = "all " + this.props.animationSpeed + "s";
+			e.style.transition = "transform " + this.props.animationSpeed + "s";
 		}.bind(this));
 
 		this.setState({
-			width: width,
+			offset: offset,
 			elements: elements,
 			coverflow: coverflow
 		});
+	},
+	componentDidUpdate: function() {
+		if (!this.state.shouldUpdate) return;
+
+		this.setState({shouldUpdate: false});
+		var offset = [];
+
+		_.forEach(this.state.elements, function(e, key) {
+				offset.push(e.offsetLeft);
+		});
+
+		this.setState({offset: offset});
+		this._animation(this.state.position, offset);
+	},
+	componentWillReceiveProps: function(newProps) {
+		if (newProps.margin) this.setState({shouldUpdate: true});
 	},
 	render: function() {
 		return (
@@ -78,7 +90,7 @@ module.exports = React.createClass({
 		}
 	},
 	next: function() {;
-		if (this.state.position < (this.state.width.length - 1)) {
+		if (this.state.position < (this.state.offset.length - 1)) {
 			var position = this.state.position + 1;
 			this.setState({position: position});
 			this._animation(position);
@@ -86,7 +98,7 @@ module.exports = React.createClass({
 	},
 	goAt: function(pos) {
 		if (pos < 0) pos = 0;
-		else if (pos >= this.state.width.lenght) pos = this.state.width.lenght - 1;
+		else if (pos >= this.state.offset.length) pos = this.state.offset.length - 1;
 
 		this.setState({position: pos});
 		this._animation(pos);
@@ -118,8 +130,7 @@ module.exports = React.createClass({
 		var lastX = this.state.touchStart;
 
 		var move = clientX - lastX;
-		var width = this.state.position > 0 ? this.state.width[(this.state.position)] - this.state.width[(this.state.position - 1)] : this.state.width[0];
-		width /= 2;
+		var width = this.state.elements[this.state.position].offsetWidth / 2;
 
 		if (Math.abs(move) >= width) {
 			this.setState({
@@ -132,8 +143,10 @@ module.exports = React.createClass({
 		  	}
 		}
 	},
-	_animation: function(position) {
-		var translateX = "translateX(" + ((this.state.coverflow.offsetWidth / 2) - (this.state.width[0] / 2) - (position > 0 ? this.state.width[(position) - 1] : 0)) + "px)";
+	_animation: function(position, offset) {
+		var offset = offset ? offset : this.state.offset;
+
+		var translateX = "translateX(" + ((this.state.coverflow.offsetWidth / 2) - (this.state.elements[position].offsetWidth / 2) - offset[(position)]) + "px)";
 		_.forEach(this.state.elements, function(e, key) {
 			var rotateY = position > key ? " rotateY(40deg)" : position < key ? " rotateY(-40deg)" : "";
 			e.style.transform = translateX + rotateY;
