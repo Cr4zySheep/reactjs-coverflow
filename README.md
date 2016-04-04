@@ -173,5 +173,4 @@ $ npm run full
 
 
 ## To Do
-* Dynamical margin between coverflow_Element
-* Margin is not compatible with em, vw, vh... value
+* 0.2.0 possibility to use margin in CSS (with media queries), add :active class proprety, upgrade css :not-active = opacity(0.85) *FINAL VERSION*
