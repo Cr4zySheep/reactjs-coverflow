@@ -30,23 +30,20 @@ The required stylesheet using `css-module` and include in package(js file), so y
 
 ## Usage
 
+Exemple :
+
 ```
 var React = require('react');
-var Coverflow = require('reactjs-coverflow');
+var Coverflow = require('../../lib/react-coverflowX')
 
 module.exports = React.createClass({
-	getInitialState: function() {
-		return {
-			margin: 20
-		};
-	},
 	render: function() {
 		return (
 			<div>
 				<form>
 					<Coverflow ref="coverflow"
 					style={{width: "100vw", height:"500px"}}
-					margin={(this.state.margin || 0) + "px"}
+					margin={(this.state && this.state.margin + "px") || undefined}
 					startPosition={4}
 					enableScroll={true}>
 					    <div style={{width: '150px', height: '150px', backgroundColor: 'pink'}} />
@@ -59,7 +56,7 @@ module.exports = React.createClass({
 						<div style={{width: '200px', height: '150px', backgroundColor: 'pink'}} />
 					</Coverflow>
 
-					<input type="text" name="margin" onChange={this.handleChange} />
+					<input type="text" name="margin" onChange={this.handleMarginChange} />
 					<button onClick={this.prev} type="button">Prev</button>
 					<button onClick={this.next} type="button">Next</button>
 					<button onClick={this.getPosition} type="button">GetPosition</button>
@@ -93,9 +90,12 @@ module.exports = React.createClass({
 
 #### Options
 
-* startPosition [number]: Start at 0, determine the starting element of your coverflow
-* enableScroll [boolean]: Enable scrolling feature.
-* margin [string]: margin between elements in coverflow
+* startPosition [number]: Start at 0, determine the starting element of your coverflow (default: 0)
+* enableScroll [boolean]: Enable scrolling feature. ((default: true)
+* margin [string]: margin between elements in coverflow (default: USE CSS)
+!! Don't use margin proprety if you prefer to use media queries, overwrite the CSS and the class .react-coverflow-X_Element!!
+* animationSpeed[string]: Speed of animation coverflow (default: USE CSS)
+!! Same that margin !!
 
 #### Refs
 
@@ -130,6 +130,8 @@ You can use it to create some button
 .react-coverflow-X_Element {
 	position: relative;
 	-webkit-box-reflect: below 1px -webkit-linear-gradient(bottom,rgba(0,0,0,.6),rgba(0,0,0,.1) 20%,transparent 30%,transparent);
+	margin: auto 20px;
+	transition: transform 0.7s;
 }
 ```
 
@@ -167,10 +169,3 @@ $ npm run test
 # You can run all this command with the following command:
 $ npm run full
 ```
-
-## Release History
-* 2016-03-30 v0.1 First Version
-
-
-## To Do
-* 0.2.0 possibility to use margin in CSS (with media queries), add :active class proprety, upgrade css :not-active = opacity(0.85) *FINAL VERSION*
