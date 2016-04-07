@@ -14,8 +14,7 @@ module.exports = React.createClass({
 		return {
 			animationSpeed: 0.7,
 			enableScroll: true,
-			startPosition: 0,
-			margin: "25px"
+			startPosition: 0
 		};
 	},
 	getInitialState: function getInitialState() {
@@ -82,7 +81,7 @@ module.exports = React.createClass({
 				_.map(this.props.children, function (element, i) {
 					return React.createElement(
 						'figure',
-						{ key: i, className: 'react-coverflow-X_Element', style: { margin: "auto " + this.props.margin } },
+						{ key: i, className: "react-coverflow-X_Element" + (i == this.state.position ? " active" : ""), style: this.props.margin ? { margin: "auto " + this.props.margin } : {} },
 						element
 					);
 				}.bind(this))
@@ -162,7 +161,7 @@ module.exports = React.createClass({
 		if (!this.constructor.cssLoaded && typeof document != "undefined") {
 			this.constructor.cssLoaded = true;
 
-			var css = ".react-coverflow-X_Main { position: relative; margin: 0; padding: 0; background-color: rgba(0, 0, 0, 0.1); overflow: hidden; } .react-coverflow-X_Coverflow { width: 100%; height: 100%; display: flex; -webkit-transform-style: preserve-3d; transform-style: preserve-3d; -webkit-perspective: 500px; perspective: 500px; } .react-coverflow-X_Element { position: relative; -webkit-box-reflect: below 1px -webkit-linear-gradient(bottom,rgba(0,0,0,.6),rgba(0,0,0,.1) 20%,transparent 30%,transparent); }";
+			var css = ".react-coverflow-X_Main { position: relative; margin: 0; padding: 0; background-color: rgba(0, 0, 0, 0.1); overflow: hidden; } .react-coverflow-X_Coverflow { width: 100%; height: 100%; display: flex; -webkit-transform-style: preserve-3d; transform-style: preserve-3d; -webkit-perspective: 500px; perspective: 500px; } .react-coverflow-X_Element { position: relative; -webkit-box-reflect: below 1px -webkit-linear-gradient(bottom,rgba(0,0,0,.6),rgba(0,0,0,.1) 20%,transparent 30%,transparent); margin: auto 20px; }";
 			var head = document.head || document.getElementsByTagName('head')[0],
 			    style = document.createElement('style');
 
@@ -34310,18 +34309,13 @@ var React = require('react');
 var Coverflow = require('../../lib/react-coverflowX')
 
 var Exemple = React.createClass({displayName: "Exemple",
-	getInitialState: function() {
-		return {
-			margin: 20
-		};
-	},
 	render: function() {
 		return (
 			React.createElement("div", null, 
 				React.createElement("form", null, 
 					React.createElement(Coverflow, {ref: "coverflow", 
 					style: {width: "100vw", height:"500px"}, 
-					margin: (this.state.margin || 0) + "px", 
+					margin: (this.state && this.state.margin + "px") || undefined, 
 					startPosition: 4, 
 					enableScroll: true}, 
 					    React.createElement("div", {style: {width: '150px', height: '150px', backgroundColor: 'pink'}}), 
@@ -34334,7 +34328,7 @@ var Exemple = React.createClass({displayName: "Exemple",
 						React.createElement("div", {style: {width: '200px', height: '150px', backgroundColor: 'pink'}})
 					), 
 
-					React.createElement("input", {type: "text", name: "margin", onChange: this.handleChange}), 
+					React.createElement("input", {type: "text", name: "margin", onChange: this.handleMarginChange}), 
 					React.createElement("button", {onClick: this.prev, type: "button"}, "Prev"), 
 					React.createElement("button", {onClick: this.next, type: "button"}, "Next"), 
 					React.createElement("button", {onClick: this.getPosition, type: "button"}, "GetPosition"), 
@@ -34346,6 +34340,7 @@ var Exemple = React.createClass({displayName: "Exemple",
 	handleMarginChange: function(e) {
 		e.preventDefault();
 		this.setState({margin: parseFloat(e.currentTarget.value)});
+		console.log(this);
 	},
 	prev: function(e) {
 		e.preventDefault();
