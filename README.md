@@ -34,7 +34,7 @@ Exemple :
 
 ```
 var React = require('react');
-var Coverflow = require('../../lib/react-coverflowX')
+var Coverflow = require('reactjs-coverflow');
 
 module.exports = React.createClass({
 	render: function() {
