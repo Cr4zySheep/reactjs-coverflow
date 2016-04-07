@@ -7,7 +7,6 @@ var _ = require('lodash');
 module.exports = React.createClass({
 	getDefaultProps: function() {
 		return {
-			animationSpeed: 0.7,
 			enableScroll: true,
 			startPosition: 0
 		}
@@ -36,7 +35,7 @@ module.exports = React.createClass({
 		_.forEach(elements, function(e, key) {
 			var rotateY = this.state.position > key ? " rotateY(40deg)" : this.state.position < key ? " rotateY(-40deg)" : "";
 			e.style.transform = translateX + rotateY;
-			e.style.transition = "transform " + this.props.animationSpeed + "s";
+			if (this.props.animationSpeed) e.style.transition = "transform " + this.props.animationSpeed + "s";
 		}.bind(this));
 
 		this.setState({
@@ -44,19 +43,13 @@ module.exports = React.createClass({
 			elements: elements,
 			coverflow: coverflow
 		});
+		window.addEventListener('resize', this._handleResize);
 	},
 	componentDidUpdate: function() {
 		if (!this.state.shouldUpdate) return;
 
 		this.setState({shouldUpdate: false});
-		var offset = [];
-
-		_.forEach(this.state.elements, function(e, key) {
-				offset.push(e.offsetLeft);
-		});
-
-		this.setState({offset: offset});
-		this._animation(this.state.position, offset);
+		this._handleResize();
 	},
 	componentWillReceiveProps: function(newProps) {
 		if (newProps.margin) this.setState({shouldUpdate: true});
@@ -142,6 +135,16 @@ module.exports = React.createClass({
 		  	}
 		}
 	},
+	_handleResize: function() {
+		var offset = [];
+
+		_.forEach(this.state.elements, function(e, key) {
+				offset.push(e.offsetLeft);
+		});
+
+		this.setState({offset: offset});
+		this._animation(this.state.position, offset);
+	},
 	_animation: function(position, offset) {
 		var offset = offset ? offset : this.state.offset;
 
@@ -155,7 +158,7 @@ module.exports = React.createClass({
 		if (!this.constructor.cssLoaded && typeof document != "undefined") {
 			this.constructor.cssLoaded = true;
 
-			var css = ".react-coverflow-X_Main { position: relative; margin: 0; padding: 0; background-color: rgba(0, 0, 0, 0.1); overflow: hidden; } .react-coverflow-X_Coverflow { width: 100%; height: 100%; display: flex; -webkit-transform-style: preserve-3d; transform-style: preserve-3d; -webkit-perspective: 500px; perspective: 500px; } .react-coverflow-X_Element { position: relative; -webkit-box-reflect: below 1px -webkit-linear-gradient(bottom,rgba(0,0,0,.6),rgba(0,0,0,.1) 20%,transparent 30%,transparent); margin: auto 20px; }";
+			var css = ".react-coverflow-X_Main { position: relative; margin: 0; padding: 0; background-color: rgba(0, 0, 0, 0.1); overflow: hidden; } .react-coverflow-X_Coverflow { width: 100%; height: 100%; display: flex; -webkit-transform-style: preserve-3d; transform-style: preserve-3d; -webkit-perspective: 500px; perspective: 500px; } .react-coverflow-X_Element { position: relative; -webkit-box-reflect: below 1px -webkit-linear-gradient(bottom,rgba(0,0,0,.6),rgba(0,0,0,.1) 20%,transparent 30%,transparent); margin: auto 20px; transition: transform 0.7s; }";
 	    	var	head = document.head || document.getElementsByTagName('head')[0],
 	    		style = document.createElement('style');
 
@@ -167,5 +170,8 @@ module.exports = React.createClass({
 				}
 			head.appendChild(style);
 		}
+	},
+	componentWillUnmount: function() {
+		window.removeEventListener('resize', this._handleResize);
 	}
 });
