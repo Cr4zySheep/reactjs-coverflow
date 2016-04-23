@@ -1,6 +1,6 @@
 {
   "name": "reactjs-coverflow",
-  "version": "0.1.8",
+  "version": "0.2.0",
   "description": "A coverflow module for React",
   "main": "lib/react-coverflowX.js",
   "scripts": {
@@ -27,18 +27,19 @@
   "homepage": "https://github.com/Bastorx/reactjs-coverflow#readme",
   "devDependencies": {
     "browserify": "^13.0.0",
+    "debug": "^2.2.0",
+    "express": "^4.13.4",
     "express-react-views": "^0.10.0",
     "node-jsx": "^0.13.3",
-    "reactify": "^1.1.1",
-    "express": "^4.13.4"
+    "reactify": "^1.1.1"
   },
   "peersDependencies": {
-    "react": "^0.14.0",
-    "react-dom": "^0.14.0"
+    "react": "^15.0.0",
+    "react-dom": "^15.0.0"
   },
   "dependencies": {
-    "react": "^0.14.7",
-    "react-dom": "^0.14.7",
+    "react": "^15.0.0",
+    "react-dom": "^15.0.0",
     "lodash": "^4.6.1"
   }
 }
