@@ -53,14 +53,14 @@ module.exports = React.createClass({
 					    <div style={{width: '150px', height: '150px', backgroundColor: 'blue'}} />
 					    <div style={{width: '150px', height: '150px', backgroundColor: 'purple'}} />
 					    <div style={{width: '100px', height: '150px', backgroundColor: '#000000'}} />
-						<div style={{width: '200px', height: '150px', backgroundColor: 'pink'}} />
+					    <div style={{width: '200px', height: '150px', backgroundColor: 'pink'}} />
 					</Coverflow>
 
 					<input type="text" name="margin" onChange={this.handleMarginChange} />
 					<button onClick={this.prev} type="button">Prev</button>
 					<button onClick={this.next} type="button">Next</button>
 					<button onClick={this.getPosition} type="button">GetPosition</button>
-					<button onClick={this.goAt.bind(null, 4)} type="button">Go At 5</button>
+					<button onClick={this.goAt} type="button">Go At 5</button>
 				</form>
 			</div>
 		);
