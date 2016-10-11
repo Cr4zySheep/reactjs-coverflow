@@ -141,7 +141,7 @@ You can easely overwrite style propreties.
 
 * [Bastorx](https://github.com/Bastorx)
 
-Use [Github issues](https://github.com/andyyou/react-coverflow/issues) for requests
+Use [Github issues](https://github.com/Bastorx/reactjs-coverflow/issues) for requests
 
 `reactjs-coverflow` is a community project and wouldn't be what it is without contributions! We encourage and support contributions. The `reactjs-coverflow` source code is released under the MIT License.
 
