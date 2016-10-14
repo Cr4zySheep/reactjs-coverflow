@@ -11,9 +11,10 @@
 	height: 100%;
 	display: flex;
 	-webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
+	transform-style: preserve-3d;
     -webkit-perspective: 500px;
     perspective: 500px;
+
 	/*For IE*/
 	align-items: center;
 }
