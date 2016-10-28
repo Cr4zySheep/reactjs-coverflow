@@ -26,16 +26,16 @@ module.exports = class Coverflow extends Component {
 
 		let offset = [];
 
-		_.forEach(elements, function(e, key) {
+		_.forEach(elements, (e) => {
 				offset.push(e.offsetLeft);
 		});
 
 		const translateX = "translateX(" + ((coverflow.offsetWidth / 2) - (elements[this.state.position].offsetWidth / 2) - offset[(this.state.position)]) + "px)";
-		_.forEach(elements, function(e, key) {
+		_.forEach(elements, (e, key) => {
 			const rotateY = this.state.position > key ? " rotateY(40deg)" : this.state.position < key ? " rotateY(-40deg)" : "";
 			e.style.transform = translateX + rotateY;
 			if (this.props.animationSpeed) e.style.transition = "transform " + this.props.animationSpeed + "s";
-		}.bind(this));
+		});
 
 		this.setState({
 			offset: offset,
@@ -56,19 +56,20 @@ module.exports = class Coverflow extends Component {
 	render() {
 		return (
 			<div ref="coverflow"
-			className="react-coverflow-X_Main"
-			{...this.props}
+      id={this.props.id}
+			className={"react-coverflow-X_Main" + this.props.className}
+			style={this.props.style}
 			onWheel={this.props.enableScroll ? this._handleWheel.bind(this) : ""}
 			onTouchStart={this._handleTouchStart.bind(this)}
       onTouchMove={this._handleTouchMove.bind(this)}>
 				<div className="react-coverflow-X_Coverflow">
-					{_.map(this.props.children, function(element, i) {
+					{_.map(this.props.children, (element, i) => {
 						return (
 							<figure key={i} className={"react-coverflow-X_Element" + (i == this.state.position ? " active" : "")} style={this.props.margin ? {margin: "auto " + this.props.margin} : {}}>
 								{element}
 							</figure>
 						);
-					}.bind(this))}
+					})}
 				</div>
 			</div>
 		);
@@ -137,7 +138,7 @@ module.exports = class Coverflow extends Component {
 	_handleResize() {
 		let offset = [];
 
-		_.forEach(this.state.elements, function(e, key) {
+		_.forEach(this.state.elements, (e) => {
 				offset.push(e.offsetLeft);
 		});
 
@@ -148,10 +149,10 @@ module.exports = class Coverflow extends Component {
     const offset = o ? o : this.state.offset;
 
     const translateX = "translateX(" + ((this.state.coverflow.offsetWidth / 2) - (this.state.elements[position].offsetWidth / 2) - offset[(position)]) + "px)";
-		_.forEach(this.state.elements, function(e, key) {
+		_.forEach(this.state.elements, (e, key) => {
       const rotateY = position > key ? " rotateY(40deg)" : position < key ? " rotateY(-40deg)" : "";
 			e.style.transform = translateX + rotateY;
-		}.bind(this));
+		});
 	}
 	_loadCSS() {
 		if (!this.constructor.cssLoaded && typeof document != "undefined") {

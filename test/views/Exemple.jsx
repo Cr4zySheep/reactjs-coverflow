@@ -5,7 +5,6 @@ var Coverflow = require('../../lib/react-coverflowX')
 
 var Exemple = React.createClass({
 	render: function() {
-    console.log(Coverflow);
 		return (
 			<div>
 				<form>

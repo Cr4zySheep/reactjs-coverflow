@@ -1,8 +1,6 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _class, _temp;
@@ -50,22 +48,24 @@ module.exports = (_temp = _class = function (_Component) {
 	}, {
 		key: 'componentDidMount',
 		value: function componentDidMount() {
+			var _this2 = this;
+
 			this._loadCSS();
 			var coverflow = _reactDom2.default.findDOMNode(this.refs.coverflow);
 			var elements = coverflow.getElementsByClassName("react-coverflow-X_Element");
 
 			var offset = [];
 
-			_lodash2.default.forEach(elements, function (e, key) {
+			_lodash2.default.forEach(elements, function (e) {
 				offset.push(e.offsetLeft);
 			});
 
 			var translateX = "translateX(" + (coverflow.offsetWidth / 2 - elements[this.state.position].offsetWidth / 2 - offset[this.state.position]) + "px)";
 			_lodash2.default.forEach(elements, function (e, key) {
-				var rotateY = this.state.position > key ? " rotateY(40deg)" : this.state.position < key ? " rotateY(-40deg)" : "";
+				var rotateY = _this2.state.position > key ? " rotateY(40deg)" : _this2.state.position < key ? " rotateY(-40deg)" : "";
 				e.style.transform = translateX + rotateY;
-				if (this.props.animationSpeed) e.style.transition = "transform " + this.props.animationSpeed + "s";
-			}.bind(this));
+				if (_this2.props.animationSpeed) e.style.transition = "transform " + _this2.props.animationSpeed + "s";
+			});
 
 			this.setState({
 				offset: offset,
@@ -90,24 +90,27 @@ module.exports = (_temp = _class = function (_Component) {
 	}, {
 		key: 'render',
 		value: function render() {
+			var _this3 = this;
+
 			return _react2.default.createElement(
 				'div',
-				_extends({ ref: 'coverflow',
-					className: 'react-coverflow-X_Main'
-				}, this.props, {
+				{ ref: 'coverflow',
+					id: this.props.id,
+					className: "react-coverflow-X_Main" + this.props.className,
+					style: this.props.style,
 					onWheel: this.props.enableScroll ? this._handleWheel.bind(this) : "",
 					onTouchStart: this._handleTouchStart.bind(this),
-					onTouchMove: this._handleTouchMove.bind(this) }),
+					onTouchMove: this._handleTouchMove.bind(this) },
 				_react2.default.createElement(
 					'div',
 					{ className: 'react-coverflow-X_Coverflow' },
 					_lodash2.default.map(this.props.children, function (element, i) {
 						return _react2.default.createElement(
 							'figure',
-							{ key: i, className: "react-coverflow-X_Element" + (i == this.state.position ? " active" : ""), style: this.props.margin ? { margin: "auto " + this.props.margin } : {} },
+							{ key: i, className: "react-coverflow-X_Element" + (i == _this3.state.position ? " active" : ""), style: _this3.props.margin ? { margin: "auto " + _this3.props.margin } : {} },
 							element
 						);
-					}.bind(this))
+					})
 				)
 			);
 		}
@@ -189,7 +192,7 @@ module.exports = (_temp = _class = function (_Component) {
 		value: function _handleResize() {
 			var offset = [];
 
-			_lodash2.default.forEach(this.state.elements, function (e, key) {
+			_lodash2.default.forEach(this.state.elements, function (e) {
 				offset.push(e.offsetLeft);
 			});
 
@@ -205,7 +208,7 @@ module.exports = (_temp = _class = function (_Component) {
 			_lodash2.default.forEach(this.state.elements, function (e, key) {
 				var rotateY = position > key ? " rotateY(40deg)" : position < key ? " rotateY(-40deg)" : "";
 				e.style.transform = translateX + rotateY;
-			}.bind(this));
+			});
 		}
 	}, {
 		key: '_loadCSS',
@@ -38002,7 +38005,6 @@ var Coverflow = require('../../lib/react-coverflowX')
 
 var Exemple = React.createClass({displayName: "Exemple",
 	render: function() {
-    console.log(Coverflow);
 		return (
 			React.createElement("div", null, 
 				React.createElement("form", null, 
