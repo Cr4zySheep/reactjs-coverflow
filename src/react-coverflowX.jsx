@@ -1,39 +1,38 @@
-'use strict';
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import _ from 'lodash';
 
-var React = require('react');
-var ReactDOM = require('react-dom');
-var _ = require('lodash');
+module.exports = class Coverflow extends Component {
+  static defaultProps = {
+    enableScroll: true,
+    startPosition: 0
+  }
 
-module.exports = React.createClass({
-	getDefaultProps: function() {
-		return {
-			enableScroll: true,
-			startPosition: 0
-		}
-	},
-	getInitialState: function() {
-		return {
-			position: this.props.startPosition,
-			shouldUpdate: false
-		};
-	},
-	componentWillMount: function() {
+  constructor(props) {
+    super(props);
+    this.state = {
+      position: this.props.startPosition,
+      shouldUpdate: false
+    };
+  }
+
+	componentWillMount() {
 		this._loadCSS();
-	},
-	componentDidMount: function() {
+	}
+	componentDidMount() {
 		this._loadCSS();
-		var coverflow = ReactDOM.findDOMNode(this.refs.coverflow);
-		var elements = coverflow.getElementsByClassName("react-coverflow-X_Element");
+		const coverflow = ReactDOM.findDOMNode(this.refs.coverflow);
+		const elements = coverflow.getElementsByClassName("react-coverflow-X_Element");
 
-		var offset = [];
+		let offset = [];
 
 		_.forEach(elements, function(e, key) {
 				offset.push(e.offsetLeft);
 		});
 
-		var translateX = "translateX(" + ((coverflow.offsetWidth / 2) - (elements[this.state.position].offsetWidth / 2) - offset[(this.state.position)]) + "px)";
+		const translateX = "translateX(" + ((coverflow.offsetWidth / 2) - (elements[this.state.position].offsetWidth / 2) - offset[(this.state.position)]) + "px)";
 		_.forEach(elements, function(e, key) {
-			var rotateY = this.state.position > key ? " rotateY(40deg)" : this.state.position < key ? " rotateY(-40deg)" : "";
+			const rotateY = this.state.position > key ? " rotateY(40deg)" : this.state.position < key ? " rotateY(-40deg)" : "";
 			e.style.transform = translateX + rotateY;
 			if (this.props.animationSpeed) e.style.transition = "transform " + this.props.animationSpeed + "s";
 		}.bind(this));
@@ -43,25 +42,25 @@ module.exports = React.createClass({
 			elements: elements,
 			coverflow: coverflow
 		});
-		window.addEventListener('resize', this._handleResize);
-	},
-	componentDidUpdate: function() {
+		window.addEventListener('resize', this._handleResize.bind(this));
+	}
+	componentDidUpdate() {
 		if (!this.state.shouldUpdate) return;
 
 		this.setState({shouldUpdate: false});
-		this._handleResize();
-	},
-	componentWillReceiveProps: function(newProps) {
+		this._handleResize.apply(this);
+	}
+	componentWillReceiveProps(newProps) {
 		if (newProps.margin) this.setState({shouldUpdate: true});
-	},
-	render: function() {
+	}
+	render() {
 		return (
 			<div ref="coverflow"
 			className="react-coverflow-X_Main"
 			{...this.props}
-			onWheel={this.props.enableScroll ? this._handleWheel : ""}
-			onTouchStart={this._handleTouchStart}
-           	onTouchMove={this._handleTouchMove}>
+			onWheel={this.props.enableScroll ? this._handleWheel.bind(this) : ""}
+			onTouchStart={this._handleTouchStart.bind(this)}
+      onTouchMove={this._handleTouchMove.bind(this)}>
 				<div className="react-coverflow-X_Coverflow">
 					{_.map(this.props.children, function(element, i) {
 						return (
@@ -73,32 +72,32 @@ module.exports = React.createClass({
 				</div>
 			</div>
 		);
-	},
-	previous: function() {
+	}
+	previous() {
 		if (this.state.position > 0) {
-			var position = this.state.position - 1;
+			const position = this.state.position - 1;
 			this.setState({position: position});
 			this._animation(position);
 		}
-	},
-	next: function() {;
+	}
+	next() {
 		if (this.state.position < (this.state.offset.length - 1)) {
-			var position = this.state.position + 1;
+			const position = this.state.position + 1;
 			this.setState({position: position});
 			this._animation(position);
 		}
-	},
-	goAt: function(pos) {
+	}
+	goAt(pos) {
 		if (pos < 0) pos = 0;
 		else if (pos >= this.state.offset.length) pos = this.state.offset.length - 1;
 
 		this.setState({position: pos});
 		this._animation(pos);
-	},
-	getPosition: function() {
+	}
+	getPosition() {
 		return this.state.position
-	},
-	_handleWheel: function(e) {
+	}
+	_handleWheel(e) {
 		e.preventDefault();
 
 	    if (e.deltaY < 0) {
@@ -107,22 +106,22 @@ module.exports = React.createClass({
 	    else if (e.deltaY > 0) {
 	    	this.next();
 	    }
-	},
-	_handleTouchStart: function(e) {
+	}
+	_handleTouchStart(e) {
 		e.preventDefault();
 
 		this.setState({
 			touchStart: e.nativeEvent.touches[0].clientX
 		});
-	},
-	_handleTouchMove: function(e) {
+	}
+	_handleTouchMove(e) {
 		e.preventDefault();
 
-		var clientX = e.nativeEvent.touches[0].clientX;
-		var lastX = this.state.touchStart;
+		const clientX = e.nativeEvent.touches[0].clientX;
+    const lastX = this.state.touchStart;
 
-		var move = clientX - lastX;
-		var width = this.state.elements[this.state.position].offsetWidth / 2;
+    const move = clientX - lastX;
+    const width = this.state.elements[this.state.position].offsetWidth / 2;
 
 		if (Math.abs(move) >= width) {
 			this.setState({
@@ -134,9 +133,9 @@ module.exports = React.createClass({
 		    	this.next();
 		  	}
 		}
-	},
-	_handleResize: function() {
-		var offset = [];
+	}
+	_handleResize() {
+		let offset = [];
 
 		_.forEach(this.state.elements, function(e, key) {
 				offset.push(e.offsetLeft);
@@ -144,23 +143,23 @@ module.exports = React.createClass({
 
 		this.setState({offset: offset});
 		this._animation(this.state.position, offset);
-	},
-	_animation: function(position, offset) {
-		var offset = offset ? offset : this.state.offset;
+	}
+	_animation(position, o) {
+    const offset = o ? o : this.state.offset;
 
-		var translateX = "translateX(" + ((this.state.coverflow.offsetWidth / 2) - (this.state.elements[position].offsetWidth / 2) - offset[(position)]) + "px)";
+    const translateX = "translateX(" + ((this.state.coverflow.offsetWidth / 2) - (this.state.elements[position].offsetWidth / 2) - offset[(position)]) + "px)";
 		_.forEach(this.state.elements, function(e, key) {
-			var rotateY = position > key ? " rotateY(40deg)" : position < key ? " rotateY(-40deg)" : "";
+      const rotateY = position > key ? " rotateY(40deg)" : position < key ? " rotateY(-40deg)" : "";
 			e.style.transform = translateX + rotateY;
 		}.bind(this));
-	},
-	_loadCSS: function() {
+	}
+	_loadCSS() {
 		if (!this.constructor.cssLoaded && typeof document != "undefined") {
 			this.constructor.cssLoaded = true;
 
-			var css = ".react-coverflow-X_Main { position: relative; margin: 0; padding: 0; background-color: rgba(0, 0, 0, 0.1); overflow: hidden; } .react-coverflow-X_Coverflow { width: 100%; height: 100%; display: flex; -webkit-transform-style: preserve-3d; transform-style: preserve-3d; -webkit-perspective: 500px; perspective: 500px; } .react-coverflow-X_Element { position: relative; -webkit-box-reflect: below 1px -webkit-linear-gradient(bottom,rgba(0,0,0,.6),rgba(0,0,0,.1) 20%,transparent 30%,transparent); margin: auto 20px; transition: transform 0.7s; }";
-	    	var	head = document.head || document.getElementsByTagName('head')[0],
-	    		style = document.createElement('style');
+			const css = ".react-coverflow-X_Main { position: relative; margin: 0; padding: 0; background-color: rgba(0, 0, 0, 0.1); overflow: hidden; } .react-coverflow-X_Coverflow { width: 100%; height: 100%; display: flex; -webkit-transform-style: preserve-3d; transform-style: preserve-3d; -webkit-perspective: 500px; perspective: 500px; } .react-coverflow-X_Element { position: relative; -webkit-box-reflect: below 1px -webkit-linear-gradient(bottom,rgba(0,0,0,.6),rgba(0,0,0,.1) 20%,transparent 30%,transparent); margin: auto 20px; transition: transform 0.7s; }";
+      const	head = document.head || document.getElementsByTagName('head')[0];
+      let style = document.createElement('style');
 
 	    		style.type = 'text/css';
 				if (style.styleSheet){
@@ -170,8 +169,8 @@ module.exports = React.createClass({
 				}
 			head.appendChild(style);
 		}
-	},
-	componentWillUnmount: function() {
+	}
+	componentWillUnmount() {
 		window.removeEventListener('resize', this._handleResize);
 	}
-});
+};
