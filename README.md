@@ -45,7 +45,8 @@ module.exports = React.createClass({
 					style={{width: "100vw", height:"500px"}}
 					margin={(this.state && this.state.margin + "px") || undefined}
 					startPosition={4}
-					enableScroll={true}>
+					enableScroll={true}
+					animationSpeed={0.8}>
 					    <div style={{width: '150px', height: '150px', backgroundColor: 'pink'}} />
 					    <div style={{width: '150px', height: '150px', backgroundColor: 'yellow'}} />
 					    <div style={{width: '150px', height: '150px', backgroundColor: 'green'}} />
@@ -94,7 +95,7 @@ module.exports = React.createClass({
 * enableScroll [boolean]: Enable scrolling feature. ((default: true)
 * margin [string]: margin between elements in coverflow (default: USE CSS)
 !! Don't use margin proprety if you prefer to use media queries, overwrite the CSS and the class .react-coverflow-X_Element!!
-* animationSpeed[string]: Speed of animation coverflow (default: USE CSS)
+* animationSpeed[string]: Speed of animation coverflow in second (default: USE CSS)
 !! Same that margin !!
 
 #### Refs
@@ -109,7 +110,7 @@ You can use it to create some button
 
 #### CSS
 ```
-.react-coverflow-X_Main {
+.reactjs-coverflow_Main {
 	position: relative;
 	margin: 0;
     padding: 0;
@@ -117,7 +118,7 @@ You can use it to create some button
     overflow: hidden;
 }
 
-.react-coverflow-X_Coverflow {
+.reactjs-coverflow_Coverflow {
 	width: 100%;
 	height: 100%;
 	display: flex;
@@ -127,7 +128,7 @@ You can use it to create some button
     perspective: 500px;
 }
 
-.react-coverflow-X_Element {
+.reactjs-coverflow_Element {
 	position: relative;
 	-webkit-box-reflect: below 1px -webkit-linear-gradient(bottom,rgba(0,0,0,.6),rgba(0,0,0,.1) 20%,transparent 30%,transparent);
 	margin: auto 20px;
@@ -136,6 +137,10 @@ You can use it to create some button
 ```
 
 You can easely overwrite style propreties.
+
+## Major Update
+
+* Since 1.0.0 : react-coverflow-X is replace to reactjs-coverflow in the style.
 
 ## Contributors
 
@@ -151,21 +156,22 @@ Feel free to fork and improve/enhance `reactjs-coverflow` any way you want. If y
 
 If you want to custom the component there are some commands that can help you.
 
-#### Warning (babel-cli, babel-preset-es2015 and babel-preset-react must to be installed)
 ```
-$npm install -g babel babel-cli babel-preset-es2015 babel-preset-react babel-preset-stage-0
+$npm install
 ```
 
 ```
-# Compile component to lib/
-$ npm run compil
+# Build component to lib/
+$ npm run build
 
 # Build source of site
 $ npm run build-test
 
-# Run server (default port: 3001)
-$ npm run test
+# Run test-server (default port: 3001)
+$ npm run dev
 
 # You can run all this command with the following command:
-$ npm run full
+$ npm run dev
 ```
+
+PS: In development, gulp is installed and watch the code. It automatically rebuild when you use npm run dev.

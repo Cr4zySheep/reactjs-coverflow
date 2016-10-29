@@ -1,18 +1,19 @@
-'use strict';
+import React, { Component } from 'react';
+import Coverflow from '../../lib/reactjs-coverflow';
+var Coverflow2 = require('../../lib/reactjs-coverflow');
 
-var React = require('react');
-var Coverflow = require('../../lib/react-coverflowX')
-
-var Exemple = React.createClass({
-	render: function() {
+export default class Exemple extends Component {
+	render() {
+		console.log(Coverflow, Coverflow2);
 		return (
 			<div>
 				<form>
 					<Coverflow ref="coverflow"
 					style={{width: "100vw", height:"500px"}}
 					margin={(this.state && this.state.margin + "px") || undefined}
-					startPosition={4}
-					enableScroll={true}>
+					startPosition={1}
+					enableScroll={true}
+					animationSpeed={3}>
 					    <div style={{width: '150px', height: '150px', backgroundColor: 'pink'}} />
 					    <div style={{width: '150px', height: '150px', backgroundColor: 'yellow'}} />
 					    <div style={{width: '150px', height: '150px', backgroundColor: 'green'}} />
@@ -24,35 +25,32 @@ var Exemple = React.createClass({
 					</Coverflow>
 
 					<input type="text" name="margin" onChange={this.handleMarginChange} />
-					<button onClick={this.prev} type="button">Prev</button>
-					<button onClick={this.next} type="button">Next</button>
-					<button onClick={this.getPosition} type="button">GetPosition</button>
-					<button onClick={this.goAt.bind(null, 4)} type="button">Go At 5</button>
+					<button onClick={this.prev.bind(this)} type="button">Prev</button>
+					<button onClick={this.next.bind(this)} type="button">Next</button>
+					<button onClick={this.getPosition.bind(this)} type="button">GetPosition</button>
+					<button onClick={this.goAt.bind(this, 4)} type="button">Go At 5</button>
 				</form>
 			</div>
 		);
-	},
-	handleMarginChange: function(e) {
+	}
+	handleMarginChange(e) {
 		e.preventDefault();
 		this.setState({margin: parseFloat(e.currentTarget.value)});
-	},
-	prev: function(e) {
+	}
+	prev(e) {
 		e.preventDefault();
 		this.refs.coverflow.previous();
-	},
-	next: function(e) {
+	}
+	next(e) {
 		e.preventDefault();
 		this.refs.coverflow.next();
-	},
-	getPosition: function(e) {
+	}
+	getPosition(e) {
 		e.preventDefault();
 		console.log(this.refs.coverflow.getPosition());
-	},
-	goAt: function(num, e) {
+	}
+	goAt(num, e) {
 		e.preventDefault();
 		this.refs.coverflow.goAt(4);
 	}
-});
-
-
-module.exports = Exemple;
+};

@@ -22,7 +22,7 @@ module.exports = class Coverflow extends Component {
 	componentDidMount() {
 		this._loadCSS();
 		const coverflow = ReactDOM.findDOMNode(this.refs.coverflow);
-		const elements = coverflow.getElementsByClassName("react-coverflow-X_Element");
+		const elements = coverflow.getElementsByClassName("reactjs-coverflow_Element");
 
 		let offset = [];
 
@@ -57,15 +57,15 @@ module.exports = class Coverflow extends Component {
 		return (
 			<div ref="coverflow"
       id={this.props.id}
-			className={"react-coverflow-X_Main" + this.props.className}
+			className={"reactjs-coverflow_Main" + this.props.className}
 			style={this.props.style}
 			onWheel={this.props.enableScroll ? this._handleWheel.bind(this) : ""}
 			onTouchStart={this._handleTouchStart.bind(this)}
       onTouchMove={this._handleTouchMove.bind(this)}>
-				<div className="react-coverflow-X_Coverflow">
+				<div className="reactjs-coverflow_Coverflow">
 					{_.map(this.props.children, (element, i) => {
 						return (
-							<figure key={i} className={"react-coverflow-X_Element" + (i == this.state.position ? " active" : "")} style={this.props.margin ? {margin: "auto " + this.props.margin} : {}}>
+							<figure key={i} className={"reactjs-coverflow_Element" + (i == this.state.position ? " active" : "")} style={this.props.margin ? {margin: "auto " + this.props.margin} : {}}>
 								{element}
 							</figure>
 						);
@@ -147,18 +147,20 @@ module.exports = class Coverflow extends Component {
 	}
 	_animation(position, o) {
     const offset = o ? o : this.state.offset;
+    const elementsNumber = this.state.elements.length;
 
     const translateX = "translateX(" + ((this.state.coverflow.offsetWidth / 2) - (this.state.elements[position].offsetWidth / 2) - offset[(position)]) + "px)";
 		_.forEach(this.state.elements, (e, key) => {
       const rotateY = position > key ? " rotateY(40deg)" : position < key ? " rotateY(-40deg)" : "";
 			e.style.transform = translateX + rotateY;
+      e.style.zIndex = elementsNumber - Math.abs(position - key);
 		});
 	}
 	_loadCSS() {
 		if (!this.constructor.cssLoaded && typeof document != "undefined") {
 			this.constructor.cssLoaded = true;
 
-			const css = ".react-coverflow-X_Main { position: relative; margin: 0; padding: 0; background-color: rgba(0, 0, 0, 0.1); overflow: hidden; } .react-coverflow-X_Coverflow { width: 100%; height: 100%; display: flex; -webkit-transform-style: preserve-3d; transform-style: preserve-3d; -webkit-perspective: 500px; perspective: 500px; } .react-coverflow-X_Element { position: relative; -webkit-box-reflect: below 1px -webkit-linear-gradient(bottom,rgba(0,0,0,.6),rgba(0,0,0,.1) 20%,transparent 30%,transparent); margin: auto 20px; transition: transform 0.7s; }";
+			const css = ".reactjs-coverflow_Main{position:relative;margin:0;padding:0;background-color:rgba(0,0,0,.1);overflow:hidden}.reactjs-coverflow_Coverflow{width:100%;height:100%;display:flex;-webkit-transform-style:preserve-3d;transform-style:preserve-3d;-webkit-perspective:500px;perspective:500px;align-items:center}.reactjs-coverflow_Element{position:relative;-webkit-box-reflect:below 1px -webkit-linear-gradient(bottom,rgba(0,0,0,.6),rgba(0,0,0,.1) 20%,transparent 30%,transparent);margin:auto 20px;transition:transform .7s}";
       const	head = document.head || document.getElementsByTagName('head')[0];
       let style = document.createElement('style');
 
@@ -168,7 +170,7 @@ module.exports = class Coverflow extends Component {
 				} else {
 	  				style.appendChild(document.createTextNode(css));
 				}
-			head.appendChild(style);
+			head.insertBefore(style, head.firstChild);
 		}
 	}
 	componentWillUnmount() {
