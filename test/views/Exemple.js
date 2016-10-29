@@ -4,7 +4,6 @@ var Coverflow2 = require('../../lib/reactjs-coverflow');
 
 export default class Exemple extends Component {
 	render() {
-		console.log(Coverflow, Coverflow2);
 		return (
 			<div>
 				<form>
