@@ -1,11 +1,10 @@
-'use strict';
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import Exemple from './views/Exemple';
 
-var React = require('react');
-var ReactDOM = require('react-dom');
-
-var Exemple = require('./views/Exemple.jsx');
-
-ReactDOM.render(
-    <Exemple />,
-    document.getElementById('app')
-);
+class App extends Component {
+  render() {
+    return (<Exemple />);
+  }
+}
+ReactDOM.render(<App/>, document.getElementById('app'));
