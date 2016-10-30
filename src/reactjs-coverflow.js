@@ -101,12 +101,12 @@ module.exports = class Coverflow extends Component {
 	_handleWheel(e) {
 		e.preventDefault();
 
-	    if (e.deltaY < 0) {
-	    	this.previous();
-	    }
-	    else if (e.deltaY > 0) {
-	    	this.next();
-	    }
+	  if (e.deltaY < 0) {
+	  	this.previous();
+	  }
+	  else if (e.deltaY > 0) {
+	  	this.next();
+	  }
 	}
 	_handleTouchStart(e) {
 		e.preventDefault();
@@ -119,20 +119,20 @@ module.exports = class Coverflow extends Component {
 		e.preventDefault();
 
 		const clientX = e.nativeEvent.touches[0].clientX;
-    const lastX = this.state.touchStart;
+	  const lastX = this.state.touchStart;
 
-    const move = clientX - lastX;
-    const width = this.state.elements[this.state.position].offsetWidth / 2;
+	  const move = clientX - lastX;
+	  const width = this.state.elements[this.state.position].offsetWidth / 2;
 
 		if (Math.abs(move) >= width) {
 			this.setState({
 				touchStart: e.nativeEvent.touches[0].clientX
 			});
-		  	if (move > 0) {
-		    	this.previous();
-		  	} else if (move < 0) {
-		    	this.next();
-		  	}
+		  if (move > 0) {
+		   	this.previous();
+			} else if (move < 0) {
+			 	this.next();
+			}
 		}
 	}
 	_handleResize() {
@@ -164,12 +164,12 @@ module.exports = class Coverflow extends Component {
       const	head = document.head || document.getElementsByTagName('head')[0];
       let style = document.createElement('style');
 
-	    		style.type = 'text/css';
-				if (style.styleSheet){
-	  				style.styleSheet.cssText = css;
-				} else {
-	  				style.appendChild(document.createTextNode(css));
-				}
+	    style.type = 'text/css';
+			if (style.styleSheet){
+	 			style.styleSheet.cssText = css;
+			} else {
+	  		style.appendChild(document.createTextNode(css));
+			}
 			head.insertBefore(style, head.firstChild);
 		}
 	}

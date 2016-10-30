@@ -21705,7 +21705,9 @@
 				var _this3 = this;
 
 				return _react2.default.createElement('div', { ref: 'coverflow',
-					className: 'reactjs-coverflow_Main',
+					id: this.props.id,
+					className: "reactjs-coverflow_Main" + (this.props.className ? " " + this.props.className : ""),
+					style: this.props.style,
 					onWheel: this.props.enableScroll ? this._handleWheel.bind(this) : "",
 					onTouchStart: this._handleTouchStart.bind(this),
 					onTouchMove: this._handleTouchMove.bind(this) }, _react2.default.createElement('div', { className: 'reactjs-coverflow_Coverflow' }, _lodash2.default.map(this.props.children, function (element, i) {
