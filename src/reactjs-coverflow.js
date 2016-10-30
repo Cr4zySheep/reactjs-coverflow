@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom';
 import _ from 'lodash';
 
 module.exports = class Coverflow extends Component {
-  static defaultProps = {
+	static defaultProps = {
     enableScroll: true,
     startPosition: 0
   }
 
-  constructor(props) {
+	constructor(props) {
     super(props);
     this.state = {
       position: this.props.startPosition,
@@ -56,9 +56,7 @@ module.exports = class Coverflow extends Component {
 	render() {
 		return (
 			<div ref="coverflow"
-      id={this.props.id}
-			className={"reactjs-coverflow_Main" + this.props.className}
-			style={this.props.style}
+			className="reactjs-coverflow_Main"
 			onWheel={this.props.enableScroll ? this._handleWheel.bind(this) : ""}
 			onTouchStart={this._handleTouchStart.bind(this)}
       onTouchMove={this._handleTouchMove.bind(this)}>

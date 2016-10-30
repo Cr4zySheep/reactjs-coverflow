@@ -21498,7 +21498,6 @@
 		_createClass(Exemple, [{
 			key: 'render',
 			value: function render() {
-				console.log(_reactjsCoverflow2.default, Coverflow2);
 				return _react2.default.createElement(
 					'div',
 					null,
@@ -21706,9 +21705,7 @@
 				var _this3 = this;
 
 				return _react2.default.createElement('div', { ref: 'coverflow',
-					id: this.props.id,
-					className: "reactjs-coverflow_Main" + this.props.className,
-					style: this.props.style,
+					className: 'reactjs-coverflow_Main',
 					onWheel: this.props.enableScroll ? this._handleWheel.bind(this) : "",
 					onTouchStart: this._handleTouchStart.bind(this),
 					onTouchMove: this._handleTouchMove.bind(this) }, _react2.default.createElement('div', { className: 'reactjs-coverflow_Coverflow' }, _lodash2.default.map(this.props.children, function (element, i) {
