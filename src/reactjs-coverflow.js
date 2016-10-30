@@ -56,7 +56,9 @@ module.exports = class Coverflow extends Component {
 	render() {
 		return (
 			<div ref="coverflow"
-			className="reactjs-coverflow_Main"
+      id={this.props.id}
+			className={"reactjs-coverflow_Main" + (this.props.className ? (" " + this.props.className) : "")}
+			style={this.props.style}
 			onWheel={this.props.enableScroll ? this._handleWheel.bind(this) : ""}
 			onTouchStart={this._handleTouchStart.bind(this)}
       onTouchMove={this._handleTouchMove.bind(this)}>
