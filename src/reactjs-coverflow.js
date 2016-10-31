@@ -10,8 +10,9 @@ module.exports = class Coverflow extends Component {
 
 	constructor(props) {
     super(props);
+    const childrens = props.children && props.children.length;
     this.state = {
-      position: this.props.startPosition,
+      position: props.startPosition > (childrens || 0) ? (childrens || 0) - 1 : props.startPosition,
       shouldUpdate: false
     };
   }
@@ -30,7 +31,8 @@ module.exports = class Coverflow extends Component {
 				offset.push(e.offsetLeft);
 		});
 
-		const translateX = "translateX(" + ((coverflow.offsetWidth / 2) - (elements[this.state.position].offsetWidth / 2) - offset[(this.state.position)]) + "px)";
+    const activeElementWith = (elements[this.state.position] && elements[this.state.position].offsetWidth / 2) || 0;
+		const translateX = "translateX(" + ((coverflow.offsetWidth / 2) - activeElementWith - offset[(this.state.position)]) + "px)";
 		_.forEach(elements, (e, key) => {
 			const rotateY = this.state.position > key ? " rotateY(40deg)" : this.state.position < key ? " rotateY(-40deg)" : "";
 			e.style.transform = translateX + rotateY;
