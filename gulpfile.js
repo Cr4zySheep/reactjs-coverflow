@@ -15,7 +15,7 @@ gulp.task('babel', function() {
 });
 
 gulp.task('babel:watch', function() {
-  gulp.watch('./src/reactjs-coverflow.js', ['babel', 'webpack']);
+  gulp.watch('src/reactjs-coverflow.js', ['babel', 'webpack']);
 });
 
 gulp.task('webpack', function() {
@@ -25,7 +25,7 @@ gulp.task('webpack', function() {
 });
 
 gulp.task('webpack:watch', function() {
-  gulp.watch('./test/**/*.js', ['webpack']);
+  gulp.watch(['test/**/*.js', '!test/public/**'], ['webpack']);
 });
 
 gulp.task('build', ['babel']);
