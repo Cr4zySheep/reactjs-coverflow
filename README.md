@@ -94,7 +94,7 @@ module.exports = React.createClass({
 * startPosition [number]: Start at 0, determine the starting element of your coverflow (default: 0)
 * enableScroll [boolean]: Enable scrolling feature. ((default: true)
 * margin [string]: margin between elements in coverflow (default: USE CSS)
-!! Don't use margin proprety if you prefer to use media queries, overwrite the CSS and the class .react-coverflow-X_Element!!
+!! Don't use margin proprety if you prefer to use media queries, overwrite the CSS and the class .reactjs-coverflow_Element!!
 * animationSpeed[string]: Speed of animation coverflow in second (default: USE CSS)
 !! Same that margin !!
 
