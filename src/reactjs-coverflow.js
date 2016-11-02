@@ -46,12 +46,20 @@ module.exports = class Coverflow extends Component {
   }
   componentDidUpdate() {
     if (!this.state.shouldUpdate) return;
-
     this.setState({shouldUpdate: false});
     this._handleResize.apply(this);
   }
   componentWillReceiveProps(newProps) {
-    if (newProps.margin) this.setState({shouldUpdate: true});
+    if (newProps.margin != this.props.margin)
+      this.setState({shouldUpdate: true});
+    if (newProps.children != this.props.children) {
+      const childrens = newProps.children && newProps.children.length;
+      if (this.state.position > (childrens || 0))
+        this.setState({position: (childrens || 0) - 1});
+      if (childrens && this.state.position < 0)
+        this.setState({position: 0});
+      this.setState({shouldUpdate: true});
+    }
   }
   render() {
     return (
@@ -149,7 +157,8 @@ module.exports = class Coverflow extends Component {
     const offset = o ? o : this.state.offset;
     const elementsNumber = this.state.elements.length;
 
-    const translateX = "translateX(" + ((this.state.coverflow.offsetWidth / 2) - (this.state.elements[position].offsetWidth / 2) - offset[(position)]) + "px)";
+    const activeElementWith = (this.state.elements[position] && this.state.elements[position].offsetWidth / 2) || 0;
+    const translateX = "translateX(" + ((this.state.coverflow.offsetWidth / 2) - activeElementWith - offset[(position)]) + "px)";
     _.forEach(this.state.elements, (e, key) => {
       const rotateY = position > key ? " rotateY(40deg)" : position < key ? " rotateY(-40deg)" : "";
       e.style.transform = translateX + rotateY;
