@@ -1,6 +1,6 @@
 {
   "name": "reactjs-coverflow",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "description": "A coverflow module for React",
   "main": "lib/reactjs-coverflow.js",
   "scripts": {
@@ -45,7 +45,6 @@
   },
   "dependencies": {
     "react": "^15.0.0",
-    "react-dom": "^15.0.0",
-    "lodash": "^4.6.1"
+    "react-dom": "^15.0.0"
   }
 }

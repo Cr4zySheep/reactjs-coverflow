@@ -142,6 +142,10 @@ You can easely overwrite style propreties.
 
 * Since 1.0.0 : react-coverflow-X is replace to reactjs-coverflow in the style.
 
+## Minor Update
+
+* Since 1.1.0 : Lodash dependencies has been removed.
+
 ## Contributors
 
 * [Bastorx](https://github.com/Bastorx)

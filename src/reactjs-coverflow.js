@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import _ from 'lodash';
 
 module.exports = class Coverflow extends Component {
   static defaultProps = {
@@ -25,13 +24,14 @@ module.exports = class Coverflow extends Component {
 
     let offset = [];
 
-    _.forEach(elements, (e) => {
+    this._forEach(elements, e => {
       offset.push(e.offsetLeft);
     });
 
     const activeElementWith = (elements[this.state.position] && elements[this.state.position].offsetWidth / 2) || 0;
     const translateX = "translateX(" + ((coverflow.offsetWidth / 2) - activeElementWith - offset[(this.state.position)]) + "px)";
-    _.forEach(elements, (e, key) => {
+
+    this._forEach(elements, (e, key) => {
       const rotateY = this.state.position > key ? " rotateY(40deg)" : this.state.position < key ? " rotateY(-40deg)" : "";
       e.style.transform = translateX + rotateY;
       if (this.props.animationSpeed) e.style.transition = "transform " + this.props.animationSpeed + "s";
@@ -71,7 +71,7 @@ module.exports = class Coverflow extends Component {
            onTouchStart={this._handleTouchStart.bind(this)}
            onTouchMove={this._handleTouchMove.bind(this)}>
         <div className="reactjs-coverflow_Coverflow">
-          {_.map(this.props.children, (element, i) => {
+          {this.props.children.map((element, i) => {
             return (
               <figure key={i} className={"reactjs-coverflow_Element" + (i == this.state.position ? " active" : "")} style={this.props.margin ? {margin: "auto " + this.props.margin} : {}}>
                 {element}
@@ -146,7 +146,7 @@ module.exports = class Coverflow extends Component {
   _handleResize() {
     let offset = [];
 
-    _.forEach(this.state.elements, (e) => {
+    this._forEach(this.state.elements, (e) => {
       offset.push(e.offsetLeft);
     });
 
@@ -159,7 +159,7 @@ module.exports = class Coverflow extends Component {
 
     const activeElementWith = (this.state.elements[position] && this.state.elements[position].offsetWidth / 2) || 0;
     const translateX = "translateX(" + ((this.state.coverflow.offsetWidth / 2) - activeElementWith - offset[(position)]) + "px)";
-    _.forEach(this.state.elements, (e, key) => {
+    this._forEach(this.state.elements, (e, key) => {
       const rotateY = position > key ? " rotateY(40deg)" : position < key ? " rotateY(-40deg)" : "";
       e.style.transform = translateX + rotateY;
       e.style.zIndex = elementsNumber - Math.abs(position - key);
@@ -180,6 +180,11 @@ module.exports = class Coverflow extends Component {
         style.appendChild(document.createTextNode(css));
       }
       head.insertBefore(style, head.firstChild);
+    }
+  }
+  _forEach(array, cb) {
+    for (let i = 0; i < array.length; i++) {
+      cb(array[i], i);
     }
   }
   componentWillUnmount() {
