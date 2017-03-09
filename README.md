@@ -30,7 +30,7 @@ The required stylesheet using `css-module` and include in package(js file), so y
 
 ## Usage
 
-Exemple :
+Example :
 
 ```
 var React = require('react');
@@ -178,4 +178,4 @@ $ npm run dev
 $ npm run dev
 ```
 
-PS: In development, gulp is installed and watch the code. It automatically rebuild when you use npm run dev.
+PS: In development, gulp is installed and watch the code. It's automatically rebuild when you use npm run dev.
