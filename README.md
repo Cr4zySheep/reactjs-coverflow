@@ -26,7 +26,7 @@ Install `reactjs-coverflow` using npm.
 $ npm install reactjs-coverflow
 ```
 
-The required stylesheet using `css-module` and include in package(js file), so you don't need include other stylesheet.
+The required stylesheet using `css-module` and include in package(js file), so you don't need to include other stylesheet.
 
 ## Usage
 
