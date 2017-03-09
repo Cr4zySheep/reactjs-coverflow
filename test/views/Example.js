@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Coverflow from '../../lib/reactjs-coverflow';
 
-export default class Exemple extends Component {
+export default class Example extends Component {
   constructor(props) {
     super(props);
     this.state = {
