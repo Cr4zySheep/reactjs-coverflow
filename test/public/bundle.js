@@ -56,9 +56,9 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _Exemple = __webpack_require__(182);
+	var _Example = __webpack_require__(182);
 
-	var _Exemple2 = _interopRequireDefault(_Exemple);
+	var _Example2 = _interopRequireDefault(_Example);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -80,7 +80,7 @@
 	  _createClass(App, [{
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(_Exemple2.default, null);
+	      return _react2.default.createElement(_Example2.default, null);
 	    }
 	  }]);
 
@@ -21843,13 +21843,13 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Exemple = function (_Component) {
-	  _inherits(Exemple, _Component);
+	var Example = function (_Component) {
+	  _inherits(Example, _Component);
 
-	  function Exemple(props) {
-	    _classCallCheck(this, Exemple);
+	  function Example(props) {
+	    _classCallCheck(this, Example);
 
-	    var _this = _possibleConstructorReturn(this, (Exemple.__proto__ || Object.getPrototypeOf(Exemple)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (Example.__proto__ || Object.getPrototypeOf(Example)).call(this, props));
 
 	    _this.state = {
 	      page: 1
@@ -21857,7 +21857,7 @@
 	    return _this;
 	  }
 
-	  _createClass(Exemple, [{
+	  _createClass(Example, [{
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -21969,10 +21969,10 @@
 	    }
 	  }]);
 
-	  return Exemple;
+	  return Example;
 	}(_react.Component);
 
-	exports.default = Exemple;
+	exports.default = Example;
 	;
 
 /***/ }),
