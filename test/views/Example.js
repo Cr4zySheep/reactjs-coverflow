@@ -20,7 +20,7 @@ export default class Example extends Component {
           style={{width: "100vw", height:"500px"}}
           startPosition={1}
           enableScroll={true}
-          animationSpeed={0.5}>
+          animationSpeed={0.6}>
             {this.getPage(this.state.page)}
           </Coverflow>
 

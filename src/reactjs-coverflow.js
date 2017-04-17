@@ -1,11 +1,24 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import { findDOMNode } from 'react-dom';
+import PropTypes from 'prop-types';
 
 module.exports = class Coverflow extends Component {
   static defaultProps = {
     enableScroll: true,
     startPosition: 0
   }
+	static propTypes = {
+		startPosition: PropTypes.number,
+		enableScroll: PropTypes.bool,
+		margin: PropTypes.oneOfType([
+			PropTypes.string,
+			PropTypes.number
+		]),
+		animationSpeed: PropTypes.oneOfType([
+			PropTypes.string,
+			PropTypes.number
+		])
+	}
   constructor(props) {
     super(props);
     const childrens = props.children && props.children.length;
@@ -19,7 +32,7 @@ module.exports = class Coverflow extends Component {
   }
   componentDidMount() {
     this._loadCSS();
-    const coverflow = ReactDOM.findDOMNode(this.refs.coverflow);
+    const coverflow = findDOMNode(this.refs.coverflow);
     const elements = coverflow.getElementsByClassName("reactjs-coverflow_Element");
 
     let offset = [];
@@ -34,7 +47,9 @@ module.exports = class Coverflow extends Component {
     this._forEach(elements, (e, key) => {
       const rotateY = this.state.position > key ? " rotateY(40deg)" : this.state.position < key ? " rotateY(-40deg)" : "";
       e.style.transform = translateX + rotateY;
-      if (this.props.animationSpeed) e.style.transition = "transform " + this.props.animationSpeed + "s";
+      if (this.props.animationSpeed) {
+				e.style.transition = "transform " + (typeof this.props.animationSpeed == "string" ? this.props.animationSpeed : (this.props.animationSpeed + "s"));
+			}
     });
 
     this.setState({
@@ -73,7 +88,8 @@ module.exports = class Coverflow extends Component {
         <div className="reactjs-coverflow_Coverflow">
           {this.props.children.map((element, i) => {
             return (
-              <figure key={i} className={"reactjs-coverflow_Element" + (i == this.state.position ? " active" : "")} style={this.props.margin ? {margin: "auto " + this.props.margin} : {}}>
+              <figure key={i} className={"reactjs-coverflow_Element" + (i == this.state.position ? " active" : "")}
+								style={this.props.margin ? {margin: "auto " + (typeof this.props.margin == "string" ? this.props.margin : (this.props.margin + "px"))} : {}}>
                 {element}
               </figure>
             );

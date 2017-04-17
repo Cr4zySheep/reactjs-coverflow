@@ -26,11 +26,11 @@ Install `reactjs-coverflow` using npm.
 $ npm install reactjs-coverflow
 ```
 
-The required stylesheet using `css-module` and include in package(js file), so you don't need to include other stylesheet.
+The required stylesheet using `css-module` and include in package(js file), so you don't need include other stylesheet.
 
 ## Usage
 
-Example :
+Exemple :
 
 ```
 var React = require('react');
@@ -93,9 +93,9 @@ module.exports = React.createClass({
 
 * startPosition [number]: Start at 0, determine the starting element of your coverflow (default: 0)
 * enableScroll [boolean]: Enable scrolling feature. ((default: true)
-* margin [string]: margin between elements in coverflow (default: USE CSS)
+* margin [string or number (px)]: margin between elements in coverflow (default: USE CSS)
 !! Don't use margin proprety if you prefer to use media queries, overwrite the CSS and the class .reactjs-coverflow_Element!!
-* animationSpeed[string]: Speed of animation coverflow in second (default: USE CSS)
+* animationSpeed[string or number (second)]: Speed of animation coverflow in second (default: USE CSS)
 !! Same that margin !!
 
 #### Refs
@@ -178,4 +178,4 @@ $ npm run dev
 $ npm run dev
 ```
 
-PS: In development, gulp is installed and watch the code. It's automatically rebuild when you use npm run dev.
+PS: In development, gulp is installed and watch the code. It automatically rebuild when you use npm run dev.
