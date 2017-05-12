@@ -113,9 +113,9 @@ You can use it to create some button
 .reactjs-coverflow_Main {
 	position: relative;
 	margin: 0;
-    padding: 0;
-    background-color: rgba(0, 0, 0, 0.1);
-    overflow: hidden;
+    	padding: 0;
+    	background-color: rgba(0, 0, 0, 0.1);
+    	overflow: hidden;
 }
 
 .reactjs-coverflow_Coverflow {
@@ -123,9 +123,9 @@ You can use it to create some button
 	height: 100%;
 	display: flex;
 	-webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-    -webkit-perspective: 500px;
-    perspective: 500px;
+	transform-style: preserve-3d;
+	-webkit-perspective: 500px;
+	perspective: 500px;
 }
 
 .reactjs-coverflow_Element {
