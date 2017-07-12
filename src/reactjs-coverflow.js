@@ -127,7 +127,7 @@ module.exports = class Coverflow extends Component {
     return this.state.position
   }
   _fnScale(x) {
-    return 2 - x/this.props.factor;
+    return 2 * Math.exp(-x/2);
   }
   _handleWheel(e) {
     e.preventDefault();

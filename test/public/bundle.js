@@ -22557,7 +22557,7 @@
 	  }, {
 	    key: '_fnScale',
 	    value: function _fnScale(x) {
-	      return 2 - x / this.props.factor;
+	      return 2 * Math.exp(-x / 2);
 	    }
 	  }, {
 	    key: '_handleWheel',

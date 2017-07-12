@@ -1,6 +1,6 @@
 {
   "name": "reactjs-coverflow-scale",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A coverflow module for React",
   "main": "lib/reactjs-coverflow.js",
   "scripts": {
