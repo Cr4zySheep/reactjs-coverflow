@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 
+
 module.exports = class Coverflow extends Component {
   static defaultProps = {
     enableScroll: true,
-    startPosition: 0
+    startPosition: 0,
+    factor: 2.5
   }
 	static propTypes = {
 		startPosition: PropTypes.number,
@@ -17,7 +19,8 @@ module.exports = class Coverflow extends Component {
 		animationSpeed: PropTypes.oneOfType([
 			PropTypes.string,
 			PropTypes.number
-		])
+		]),
+    factor: PropTypes.number
 	}
   constructor(props) {
     super(props);
@@ -46,7 +49,8 @@ module.exports = class Coverflow extends Component {
 
     this._forEach(elements, (e, key) => {
       const rotateY = this.state.position > key ? " rotateY(40deg)" : this.state.position < key ? " rotateY(-40deg)" : "";
-      e.style.transform = translateX + rotateY;
+      const scale = " scale(" + this._fnScale(Math.abs(key - this.state.position)) + ")"
+      e.style.transform = translateX + rotateY + scale;
       if (this.props.animationSpeed) {
 				e.style.transition = "transform " + (typeof this.props.animationSpeed == "string" ? this.props.animationSpeed : (this.props.animationSpeed + "s"));
 			}
@@ -122,6 +126,9 @@ module.exports = class Coverflow extends Component {
   getPosition() {
     return this.state.position
   }
+  _fnScale(x) {
+    return 2 - x/this.props.factor;
+  }
   _handleWheel(e) {
     e.preventDefault();
 
@@ -173,11 +180,13 @@ module.exports = class Coverflow extends Component {
     const offset = o ? o : this.state.offset;
     const elementsNumber = this.state.elements.length;
 
+
     const activeElementWith = (this.state.elements[position] && this.state.elements[position].offsetWidth / 2) || 0;
     const translateX = "translateX(" + ((this.state.coverflow.offsetWidth / 2) - activeElementWith - offset[(position)]) + "px)";
     this._forEach(this.state.elements, (e, key) => {
       const rotateY = position > key ? " rotateY(40deg)" : position < key ? " rotateY(-40deg)" : "";
-      e.style.transform = translateX + rotateY;
+      const scale = " scale(" + this._fnScale(Math.abs(key - position)) + ")"
+      e.style.transform = translateX + rotateY + scale;
       e.style.zIndex = elementsNumber - Math.abs(position - key);
     });
   }
