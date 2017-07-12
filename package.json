@@ -1,5 +1,5 @@
 {
-  "name": "reactjs-coverflow",
+  "name": "reactjs-coverflow-scale",
   "version": "1.1.1",
   "description": "A coverflow module for React",
   "main": "lib/reactjs-coverflow.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Bastorx/reactjs-coverflow.git"
+    "url": "git+https://github.com/cr4zysheep/reactjs-coverflow.git"
   },
   "keywords": [
     "Carousel",
@@ -22,9 +22,9 @@
   "author": "Bastorx",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Bastorx/reactjs-coverflow/issues"
+    "url": "https://github.com/cr4zysheep/reactjs-coverflow/issues"
   },
-  "homepage": "https://github.com/Bastorx/reactjs-coverflow#readme",
+  "homepage": "https://github.com/cr4zysheep/reactjs-coverflow#readme",
   "devDependencies": {
     "babel-core": "^6.18.0",
     "babel-loader": "^6.2.7",
