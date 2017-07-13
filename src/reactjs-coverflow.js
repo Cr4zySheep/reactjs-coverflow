@@ -7,7 +7,6 @@ module.exports = class Coverflow extends Component {
   static defaultProps = {
     enableScroll: true,
     startPosition: 0,
-    factor: 2.5
   }
 	static propTypes = {
 		startPosition: PropTypes.number,
@@ -20,7 +19,6 @@ module.exports = class Coverflow extends Component {
 			PropTypes.string,
 			PropTypes.number
 		]),
-    factor: PropTypes.number
 	}
   constructor(props) {
     super(props);
@@ -127,7 +125,7 @@ module.exports = class Coverflow extends Component {
     return this.state.position
   }
   _fnScale(x) {
-    return 2 * Math.exp(-x/2);
+    return 2 * Math.exp(-Math.log(4) * x / 4);
   }
   _handleWheel(e) {
     e.preventDefault();

@@ -22557,7 +22557,7 @@
 	  }, {
 	    key: '_fnScale',
 	    value: function _fnScale(x) {
-	      return 2 * Math.exp(-x / 2);
+	      return 2 * Math.exp(-Math.log(4) * x / 4);
 	    }
 	  }, {
 	    key: '_handleWheel',
@@ -22666,14 +22666,12 @@
 	  return Coverflow;
 	}(_react.Component), _class.defaultProps = {
 	  enableScroll: true,
-	  startPosition: 0,
-	  factor: 2.5
+	  startPosition: 0
 	}, _class.propTypes = {
 	  startPosition: _propTypes2.default.number,
 	  enableScroll: _propTypes2.default.bool,
 	  margin: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number]),
-	  animationSpeed: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number]),
-	  factor: _propTypes2.default.number
+	  animationSpeed: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
 	}, _temp);
 
 /***/ }),

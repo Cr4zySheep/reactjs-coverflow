@@ -91,7 +91,6 @@ module.exports = React.createClass({
 
 #### Options
 
-* factor [number]: Greater than 0, determine the scale factor
 * startPosition [number]: Start at 0, determine the starting element of your coverflow (default: 0)
 * enableScroll [boolean]: Enable scrolling feature. ((default: true)
 * margin [string or number (px)]: margin between elements in coverflow (default: USE CSS)
